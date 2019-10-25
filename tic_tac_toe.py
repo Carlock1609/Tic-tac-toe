@@ -1,25 +1,10 @@
-#! python3
-
+'''
+test
+'''
 height = 3
 width = 3
 # board = [[' ',' ',''],[' ',' ',''],[' ',' ','']]  # start with an empty list
 sample = [['1','2','3'],['4','5','6'],['7','8','9']]
-
-class Player:
-   def __init__(self, name, token):
-      self.name = name
-      self.token = token
-
-class Game:
-   def __init__(self):
-      self.board = [['1',' ',' '],[' ',' ',' '],[' ',' ',' ']]
-   
-   def __repr__(self):
-      #drawing a board 
-      for i in sample:
-         result = " | ".join(i)
-      return result
-
 number_dict = {
     1: [0, 0],
     2: [0, 1],
@@ -32,9 +17,58 @@ number_dict = {
     9: [2, 2]
 }
 
-<<<<<<< HEAD:tic_tac_toe.py.py
+class Player:
+   def __init__(self, name, token):
+      self.name = name
+      self.token = token
+
+class Game:
+   def __init__(self):
+      self.board = [[' ',' ',' '],[' ',' ',' '],[' ',' ',' ']]
+   
+   def __repr__(self):
+      #drawing a board 
+      for i in self.board:
+         result = " | ".join(i)
+         print(result)     
+
+   def calc_winner(self, player, ls):
+      ls.sort()
+      if ls.__contains__(1) and ls.__contains__(2) and ls.__contains__(3): # Across top
+         return True, player.name
+      elif ls.__contains__(4) and ls.__contains__(5) and ls.__contains__(6): # Across middle
+         return True, player.name
+      elif ls.__contains__(7) and ls.__contains__(8) and ls.__contains__(9): # Across Bottom
+         return True, player.name
+      elif ls.__contains__(1) and ls.__contains__(4) and ls.__contains__(7): # Vert left
+         return True, player.name         
+      elif ls.__contains__(2) and ls.__contains__(5) and ls.__contains__(8): # Vert middle
+         return True, player.name
+      elif ls.__contains__(3) and ls.__contains__(6) and ls.__contains__(9): # Vert Right
+         return True, player.name
+      elif ls.__contains__(1) and ls.__contains__(5) and ls.__contains__(9): # Top left lower right
+         return True, player.name
+      elif ls.__contains__(3) and ls.__contains__(5) and ls.__contains__(7): # Top right to bottom left
+         return True, player.name
+      else:
+         return False, player.name
+   
+   def move(self, player):
+      player_pick = int(input(f"{player.name}, Make your move: "))
+      numb = number_dict.get(player_pick)
+
+      if self.board[numb[0]][numb[1]] == " ":
+         self.board[numb[0]][numb[1]] = player.token
+         return player_pick
+      else:
+         print("This box is already take. Try another one!")
+         self.move(player)
+
 def game_begin(board, p1, p2):
    winning_undetermined = True
+   player1_numb_ls = []
+   player2_numb_ls = []
+
    print("To place \'X\' or \'O\' on the grid, enter an integer from 1 to 9 as a designated box on the grid.")
    #drawing a board for sample
    for i in sample:
@@ -42,17 +76,32 @@ def game_begin(board, p1, p2):
       print(result)
          
    while winning_undetermined:
-      # print(p1.token)
-      player1_pick = int(input("Make your move: "))
-      numb = number_dict.get(player1_pick)
-      board.board[numb[0]][numb[1]] = 'x'
-      
-      for i in board.board:
-         result = " | ".join(i)
-         print(result)      
-      
+      #player 1 move
+      player_pick = board.move(p1)
+      player1_numb_ls.append(player_pick)
+      is_Winning, winner_name = board.calc_winner(p1, player1_numb_ls)
 
+      if is_Winning == True:
+         board.__repr__()
+         print(f"{winner_name}, you're win!!!")
+         exit()
 
+      #print the game board
+      board.__repr__()
+
+      #player 2 move
+      player_pick = board.move(p2)
+      player2_numb_ls.append(player_pick)
+      is_Winning, winner_name = board.calc_winner(p2, player2_numb_ls)
+
+      if is_Winning == True:
+         board.__repr__()
+         print(f"{winner_name}, you're win!!!")
+         exit()
+         
+      #print the game board
+      board.__repr__()
+  
 def main():
    print("Welcome to tic-tac-toe!\nThis is a two-player game.\n")
    player1_name = input("Player 1, type in your name: ")
@@ -69,11 +118,6 @@ main()
 # #drawing a board for sample
 # for i in range (len(sample)): 
 #    print(sample[i])
-=======
-#drawing a board for sample
-for i in range (len(sample)): 
-   print(sample[i])
->>>>>>> 9cc3652b53c1ee120ed03e443324c47ee0b1234a:tic_tac_toe.py
 
 # user1 = int(input("choose a box that you want to put 'X': "))
 
@@ -85,34 +129,3 @@ for i in range (len(sample)):
 # for i in range (len(board)): 
 #    print(board[i])
 
-class Player():
-
-   def __init__(self,
-               name,
-               token="X"or"O"):
-      self.name = name
-      self.token = token
-
-class Game():
-   
-   def __init__(self, 
-               board,):
-      self.board = board
-
-   def __repr__(self):
-      pass
-
-   def move(self, x, y, player):
-      pass
-
-   def calc_winner(self):
-      pass
-
-   def is_full(self):
-      pass
-
-   def is_game_over(self):
-      pass
-
-def main():
-   pass
