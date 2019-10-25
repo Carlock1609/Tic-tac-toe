@@ -24,7 +24,7 @@ class Player:
 
 class Game:
    def __init__(self):
-      self.board = [[' ',' ',' '],[' ',' ',' '],[' ',' ',' ']]
+      self.board = [['1','2','3'],['4','5','6'],['7','8','9']]
    
    def __repr__(self):
       #drawing a board 
@@ -57,7 +57,7 @@ class Game:
       player_pick = int(input(f"{player.name}, Make your move: "))
       numb = number_dict.get(player_pick)
 
-      if self.board[numb[0]][numb[1]] == " ":
+      if self.board[numb[0]][numb[1]] != 'X' or self.board[numb[0]][numb[1]] != 'O':
          self.board[numb[0]][numb[1]] = player.token
          return player_pick
       else:
@@ -88,6 +88,10 @@ def game_begin(board, p1, p2):
 
       #print the game board
       board.__repr__()
+      # Check for tie
+      if len(player1_numb_ls) + len(player2_numb_ls) == 9:
+            print("Tie! Board is full!")
+            exit()
 
       #player 2 move
       player_pick = board.move(p2)
@@ -99,9 +103,13 @@ def game_begin(board, p1, p2):
          print(f"{winner_name}, you're win!!!")
          exit()
          
-      #print the game board
+      
       board.__repr__()
-  
+      # Check for tie
+      if len(player1_numb_ls) + len(player2_numb_ls) == 9:
+         print("Tie! board is full!")
+         exit()
+
 def main():
    print("Welcome to tic-tac-toe!\nThis is a two-player game.\n")
    player1_name = input("Player 1, type in your name: ")
