@@ -1,6 +1,5 @@
-'''
-test
-'''
+#! python3
+
 height = 3
 width = 3
 # board = [[' ',' ',''],[' ',' ',''],[' ',' ','']]  # start with an empty list
@@ -33,6 +32,7 @@ number_dict = {
     9: [2, 2]
 }
 
+<<<<<<< HEAD:tic_tac_toe.py.py
 def game_begin(board, p1, p2):
    winning_undetermined = True
    print("To place \'X\' or \'O\' on the grid, enter an integer from 1 to 9 as a designated box on the grid.")
@@ -69,6 +69,11 @@ main()
 # #drawing a board for sample
 # for i in range (len(sample)): 
 #    print(sample[i])
+=======
+#drawing a board for sample
+for i in range (len(sample)): 
+   print(sample[i])
+>>>>>>> 9cc3652b53c1ee120ed03e443324c47ee0b1234a:tic_tac_toe.py
 
 # user1 = int(input("choose a box that you want to put 'X': "))
 
@@ -80,3 +85,34 @@ main()
 # for i in range (len(board)): 
 #    print(board[i])
 
+class Player():
+
+   def __init__(self,
+               name,
+               token="X"or"O"):
+      self.name = name
+      self.token = token
+
+class Game():
+   
+   def __init__(self, 
+               board,):
+      self.board = board
+
+   def __repr__(self):
+      pass
+
+   def move(self, x, y, player):
+      pass
+
+   def calc_winner(self):
+      pass
+
+   def is_full(self):
+      pass
+
+   def is_game_over(self):
+      pass
+
+def main():
+   pass
