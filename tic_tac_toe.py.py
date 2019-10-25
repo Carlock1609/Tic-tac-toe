@@ -24,7 +24,7 @@ class Player:
 
 class Game:
    def __init__(self):
-      self.board = [['1',' ',' '],[' ',' ',' '],[' ',' ',' ']]
+      self.board = [[' ',' ',' '],[' ',' ',' '],[' ',' ',' ']]
    
    def __repr__(self):
       #drawing a board 
@@ -52,6 +52,20 @@ class Game:
          return True, player.name
       else:
          return False, player.name
+   
+   def move(self, player):
+      player_pick = int(input(f"{player.name}, Make your move: "))
+      numb = number_dict.get(player_pick)
+
+      if self.board[numb[0]][numb[1]] == " ":
+         self.board[numb[0]][numb[1]] = player.token
+         return player_pick
+      else:
+         print("This box is already take. Try another one!")
+         self.move(player)
+
+      
+
       
 
 
@@ -69,11 +83,8 @@ def game_begin(board, p1, p2):
          
    while winning_undetermined:
       #player 1 move
-      player1_pick = int(input(f"{p1.name}, Make your move: "))
-      player1_numb_ls.append(player1_pick)
-      numb = number_dict.get(player1_pick)
-      board.board[numb[0]][numb[1]] = p1.token
-      board.calc_winner(p1, player1_numb_ls)
+      player_pick = board.move(p1)
+      player1_numb_ls.append(player_pick)
       is_Winning, winner_name = board.calc_winner(p1, player1_numb_ls)
 
       if is_Winning == True:
@@ -87,10 +98,8 @@ def game_begin(board, p1, p2):
          print(result)     
 
       #player 2 move
-      player2_pick = int(input(f"{p2.name}, Make your move: "))
-      player2_numb_ls.append(player2_pick)
-      numb = number_dict.get(player2_pick)
-      board.board[numb[0]][numb[1]] = p2.token
+      player_pick = board.move(p2)
+      player2_numb_ls.append(player_pick)
       is_Winning, winner_name = board.calc_winner(p2, player2_numb_ls)
 
       if is_Winning == True:
