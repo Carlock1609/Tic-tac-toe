@@ -1,6 +1,5 @@
-'''
-test
-'''
+#! python3
+
 height = 3
 width = 3
 board = [[' ',' ',''],[' ',' ',''],[' ',' ','']]  # start with an empty list
@@ -18,9 +17,6 @@ number_dict = {
     9: [2, 2]
 }
 
-
-
-
 #drawing a board for sample
 for i in range (len(sample)): 
    print(sample[i])
@@ -35,3 +31,34 @@ board[temp[0]][temp[1]] = 'X'
 for i in range (len(board)): 
    print(board[i])
 
+class Player():
+
+   def __init__(self,
+               name,
+               token="X"or"O"):
+      self.name = name
+      self.token = token
+
+class Game():
+   
+   def __init__(self, 
+               board,):
+      self.board = board
+
+   def __repr__(self):
+      pass
+
+   def move(self, x, y, player):
+      pass
+
+   def calc_winner(self):
+      pass
+
+   def is_full(self):
+      pass
+
+   def is_game_over(self):
+      pass
+
+def main():
+   pass
