@@ -111,5 +111,70 @@ def main():
    board = Game()
    game_begin(board, p1, p2)
 
-main()
+# main()
+
+## FAILS WHEN RUNS INTO DOUBLE INT
+
+win_check = [[1,2],[2,3],[3,4],[4,5],[4,4]]
+win_check.sort()
+horizontal_list = []
+for i in win_check:
+   horizontal_list.append(i[0])
+count = horizontal_list.count(win_check[0][0])
+if count == 4:
+   print("you win horizontally")
+
+
+vertical_list = []
+for i in win_check:
+   vertical_list.append(i[1])
+count = vertical_list.count(win_check[1][1])
+if count == 4:
+   print("You win vertically!")
+
+x_axis = []
+y_axis = []
+for i in win_check:
+   x_axis.append(i[0])
+   y_axis.append(i[1])
+
+x_axis.sort()
+print(x_axis)
+y_axis.sort()
+print(y_axis)
+count = 0
+
+for i in range(len(x_axis)):
+   if i == 0:
+      continue
+   if x_axis[i] == x_axis[i-1] + 1 and x_axis[i-1] == x_axis[0] and y_axis[i] == y_axis[i-1] + 1 and y_axis[i-1] == y_axis[0]:
+      count += 2
+      continue
+   elif x_axis[i] == x_axis[i-1] + 1 and y_axis[i] == y_axis[i-1] + 1: 
+      count += 1
+      if count == 4:
+         break
+      else:
+         continue
+   else:
+      count = 0
+   
+      
+
+# for i in range(len(y_axis)):
+#    if i == 0:
+#       continue
+#    if y_axis[i] == y_axis[i-1] + 1 and y_axis[i-1] == y_axis[0]:
+#       y_count += 2
+#       continue
+#    if y_axis[i] == y_axis[i-1] + 1:
+#       y_count += 1
+#       continue
+#    if y_count == 4:
+#       break
+print(count)
+if count >= 4:
+   print("You won!")
+else:
+   print("You have not won!")
 
