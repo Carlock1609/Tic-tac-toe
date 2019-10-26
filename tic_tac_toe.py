@@ -64,7 +64,7 @@ def game_begin(board, p1, p2):
    player1_numb_ls = []
    player2_numb_ls = []
 
-   print("To place \'👻\' or \'☠️\' on the grid, enter an integer from 1 to 9 as a designated box on the grid.")
+   print("To place \'👻\' or \'☠️\' on the grid, enter an integer from 1-9 as a designated box on the grid.")
    #drawing a board for sample
    board.__repr__()
    while winning_undetermined:
