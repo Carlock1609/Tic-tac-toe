@@ -1,21 +1,4 @@
-'''
-test
-'''
-height = 3
-width = 3
-# board = [[' ',' ',''],[' ',' ',''],[' ',' ','']]  # start with an empty list
-sample = [['1','2','3'],['4','5','6'],['7','8','9']]
-number_dict = {
-    1: [0, 0],
-    2: [0, 1],
-    3: [0, 2],
-    4: [1, 0],
-    5: [1, 1],
-    6: [1, 2],
-    7: [2, 0],
-    8: [2, 1],
-    9: [2, 2]
-}
+#! python3
 
 class Player:
    def __init__(self, name, token):
@@ -54,14 +37,26 @@ class Game:
          return False, player.name
    
    def move(self, player):
+      number_dict = {
+                  1: [0, 0],
+                  2: [0, 1],
+                  3: [0, 2],
+                  4: [1, 0],
+                  5: [1, 1],
+                  6: [1, 2],
+                  7: [2, 0],
+                  8: [2, 1],
+                  9: [2, 2]
+                     }
+                     
       player_pick = int(input(f"{player.name}, Make your move: "))
       numb = number_dict.get(player_pick)
 
-      if self.board[numb[0]][numb[1]] != 'X' or self.board[numb[0]][numb[1]] != 'O':
+      if self.board[numb[0]][numb[1]] != '👻' or self.board[numb[0]][numb[1]] != '☠️':
          self.board[numb[0]][numb[1]] = player.token
          return player_pick
       else:
-         print("This box is already take. Try another one!")
+         print("This box is taken. Try another one!")
          self.move(player)
 
 def game_begin(board, p1, p2):
@@ -69,12 +64,9 @@ def game_begin(board, p1, p2):
    player1_numb_ls = []
    player2_numb_ls = []
 
-   print("To place \'X\' or \'O\' on the grid, enter an integer from 1 to 9 as a designated box on the grid.")
+   print("To place \'👻\' or \'☠️\' on the grid, enter an integer from 1 to 9 as a designated box on the grid.")
    #drawing a board for sample
-   for i in sample:
-      result = " | ".join(i)
-      print(result)
-         
+   board.__repr__()
    while winning_undetermined:
       #player 1 move
       player_pick = board.move(p1)
@@ -83,7 +75,7 @@ def game_begin(board, p1, p2):
 
       if is_Winning == True:
          board.__repr__()
-         print(f"{winner_name}, you're win!!!")
+         print(f"{winner_name}, you won!!!")
          exit()
 
       #print the game board
@@ -100,40 +92,24 @@ def game_begin(board, p1, p2):
 
       if is_Winning == True:
          board.__repr__()
-         print(f"{winner_name}, you're win!!!")
+         print(f"{winner_name}, you won!!!")
          exit()
-         
       
       board.__repr__()
       # Check for tie
       if len(player1_numb_ls) + len(player2_numb_ls) == 9:
-         print("Tie! board is full!")
+         print("Tie! Board is full!")
          exit()
 
 def main():
    print("Welcome to tic-tac-toe!\nThis is a two-player game.\n")
    player1_name = input("Player 1, type in your name: ")
    player2_name = input("Player 2, type in your name: ")
-   print(f"{player1_name}, you are 'X'. {player2_name}, you are 'O'.")
-   p1= Player(player1_name, 'X') # instantiate player 1
-   p2 = Player(player2_name, 'O') # instantiate player 2
+   print(f"{player1_name}, you are '👻'. {player2_name}, you are '☠️'.")
+   p1= Player(player1_name, '👻') # instantiate player 1
+   p2 = Player(player2_name, '☠️') # instantiate player 2
    board = Game()
-   # print(board.__repr__())
    game_begin(board, p1, p2)
 
 main()
-
-# #drawing a board for sample
-# for i in range (len(sample)): 
-#    print(sample[i])
-
-# user1 = int(input("choose a box that you want to put 'X': "))
-
-# temp = number_dict.get(user1)
-
-# board[temp[0]][temp[1]] = 'X'
-
-# #drawing a board for real game
-# for i in range (len(board)): 
-#    print(board[i])
 
