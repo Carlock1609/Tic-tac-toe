@@ -69,6 +69,21 @@ class Game:
 
         if self.board[numb[0]][numb[1]] != 'X' or self.board[numb[0]][numb[1]] != 'O':
             self.board[numb[0]][numb[1]] = player.token
+        return numb
+
+    def calc_winner(self, player, coor_list):
+        #horizontal check
+        coor_list.sort()
+        horizonal_ls = []
+        for i in range(len(coor_list)):
+            c = coor_list[i]
+            horizonal_ls.append(c[0])
+            count = horizonal_ls.count(c[0])
+            # print(count)
+            if count == 4:
+                print("you win horizontally")
+                exit()
+        
         
         
 
@@ -77,25 +92,29 @@ class Game:
 
 
 def game_begin(board, p1, p2):
-   winning_undetermined = True
-#    player1_numb_ls = []
-#    player2_numb_ls = []
+    winning_undetermined = True
+    coor = []
+    player1_numb_ls = []
+    player2_numb_ls = []
+    print(f"To place {p1.token} or {p2.token} on the grid, enter an integer from 1-7 as a designated box on the grid.")
 
-   print(f"To place {p1.token} or {p2.token} on the grid, enter an integer from 1-7 as a designated box on the grid.")
-   
    #drawing a board
-   board.__repr__()
+    board.__repr__()
+    while winning_undetermined:
+        #player 1 move
+        coor = board.move(p1)
+        player1_numb_ls.append(coor)
+        board.calc_winner(p1, player1_numb_ls)
+        board.__repr__()
 
-   while winning_undetermined:
-      #player 1 move
-      board.move(p1)
-      board.__repr__()
+        #play 2 move
+        coor = board.move(p2)
+        player2_numb_ls.append(coor)
+        board.calc_winner(p2, player2_numb_ls)        
+        board.__repr__()
 
 
-      #play 2 move
-      board.move(p2)
 
-      board.__repr__()
       
 
 def main():
