@@ -14,6 +14,13 @@ class Game:
                     '14': [4, 0], '24': [4, 1], '34': [4, 2], '44': [4, 3], '54': [4, 4], '64': [4, 5], '74': [4, 6],
                     '15': [5, 0], '25': [5, 1], '35': [5, 2], '45': [5, 3], '55': [5, 4], '65': [5, 5], '75': [5, 6],
                    }
+    Ls1 = ['10','11','12','13','14','15']
+    Ls2 = ['20','21','22','23','24','25']
+    Ls3 = ['30','31','32','33','34','35']
+    Ls4 = ['40','41','42','43','44','45']
+    Ls5 = ['50','51','52','53','54','55']
+    Ls6 = ['60','61','62','13','64','65']
+    Ls7 = ['70','71','72','73','74','75']
 
     def __init__(self):
         self.board =  [
@@ -31,71 +38,74 @@ class Game:
          result = " | ".join(i)
          print(result)   
 
-p1 = Game()
+    def move(self, player):
+        selected_num = 0
 
-print(p1.__repr__())
+        player_pick = input(f"{player.name}, Make your move: ")
+        
+        if player_pick == '1':
+            selected_num = Game.Ls1[-1]
+            Game.Ls1.remove(selected_num)
+        elif player_pick =='2':
+            selected_num = Game.Ls2[-1]
+            Game.Ls2.remove(selected_num)
+        elif player_pick =='3':
+            selected_num = Game.Ls3[-1]
+            Game.Ls3.remove(selected_num)
+        elif player_pick =='4':
+            selected_num = Game.Ls4[-1]
+            Game.Ls4.remove(selected_num)
+        elif player_pick =='5':
+            selected_num = Game.Ls5[-1]
+            Game.Ls5.remove(selected_num)
+        elif player_pick =='6':
+            selected_num = Game.Ls6[-1]
+            Game.Ls6.remove(selected_num)
+        elif player_pick =='7':
+            selected_num = Game.Ls7[-1]
+            Game.Ls7.remove(selected_num)
 
-# def move(self, player):            
-#     player_pick = int(input(f"{player.name}, Make your move: "))
-#     numb = number_dict.get(player_pick)
+        numb = Game.number_dict.get(selected_num) # getting coordinate from dictionary
 
-#     if self.board[numb[0]][numb[1]] != '👻' or self.board[numb[0]][numb[1]] != '☠️':
-#         self.board[numb[0]][numb[1]] = player.token
-#         return player_pick
-#     else:
-#         print("This box is taken. Try another one!")
-#         self.move(player)
-# def game_begin(board, p1, p2):
-#    winning_undetermined = True
+        if self.board[numb[0]][numb[1]] != 'X' or self.board[numb[0]][numb[1]] != 'O':
+            self.board[numb[0]][numb[1]] = player.token
+        
+        
+
+
+        
+
+
+def game_begin(board, p1, p2):
+   winning_undetermined = True
 #    player1_numb_ls = []
 #    player2_numb_ls = []
 
-#    print(f"To place {p1.token} or {p2.token} on the grid, enter an integer from 1-9 as a designated box on the grid.")
+   print(f"To place {p1.token} or {p2.token} on the grid, enter an integer from 1-7 as a designated box on the grid.")
    
-#    #drawing a board for sample
-#    board.__repr__()
+   #drawing a board
+   board.__repr__()
 
-#    while winning_undetermined:
-#       #player 1 move
-#       player_pick = board.move(p1)
-#       player1_numb_ls.append(player_pick)
-#       is_Winning, winner_name = board.calc_winner(p1, player1_numb_ls)
+   while winning_undetermined:
+      #player 1 move
+      board.move(p1)
+      board.__repr__()
 
-#       if is_Winning == True:
-#          board.__repr__()
-#          print(f"{winner_name}, you won!!!")
-#          exit()
 
-#       #print the game board
-#       board.__repr__()
-#       # Check for tie
-#       if len(player1_numb_ls) + len(player2_numb_ls) == 9:
-#             print("Tie! Board is full!")
-#             exit()
+      #play 2 move
+      board.move(p2)
 
-#       #player 2 move
-#       player_pick = board.move(p2)
-#       player2_numb_ls.append(player_pick)
-#       is_Winning, winner_name = board.calc_winner(p2, player2_numb_ls)
-
-#       if is_Winning == True:
-#          board.__repr__()
-#          print(f"{winner_name}, you won!!!")
-#          exit()
+      board.__repr__()
       
-#       board.__repr__()
-#       # Check for tie
-#       if len(player1_numb_ls) + len(player2_numb_ls) == 9:
-#          print("Tie! Board is full!")
-#          exit()
 
+def main():
+   print("Welcome to 4-In-A-Row!\nThis is a two-player game.\n")
+   player1_name = input("Player 1, type in your name: ")
+   player2_name = input("Player 2, type in your name: ")
+   print(f"{player1_name}, you are 'X'. {player2_name}, you are 'O'.")
+   p1= Player(player1_name, 'X') # instantiate player 1
+   p2 = Player(player2_name, 'O') # instantiate player 2
+   board = Game()
+   game_begin(board, p1, p2)
 
-# def main():
-#    print("Welcome to 4-In-A-Row!\nThis is a two-player game.\n")
-#    player1_name = input("Player 1, type in your name: ")
-#    player2_name = input("Player 2, type in your name: ")
-#    print(f"{player1_name}, you are 'X'. {player2_name}, you are 'O'.")
-#    p1= Player(player1_name, 'X') # instantiate player 1
-#    p2 = Player(player2_name, 'O') # instantiate player 2
-#    board = Game()
-#    game_begin(board, p1, p2)
+main()
