@@ -115,7 +115,9 @@ def main():
 
 ## FAILS WHEN RUNS INTO DOUBLE INT
 
-win_check = [[1,2],[2,3],[3,4],[4,5],[4,4]]
+# win_check = [[1,2],[2,3],[3,4],[4,5],[4,4]]
+# win_check = [[1,1],[2,2],[3,3],[5,5],[4,4]]
+win_check = [[2,3],[3,4],[8,7],[4,5],[5,6]]
 win_check.sort()
 horizontal_list = []
 for i in win_check:
@@ -132,32 +134,51 @@ count = vertical_list.count(win_check[1][1])
 if count == 4:
    print("You win vertically!")
 
-x_axis = []
-y_axis = []
-for i in win_check:
-   x_axis.append(i[0])
-   y_axis.append(i[1])
 
-x_axis.sort()
-print(x_axis)
-y_axis.sort()
-print(y_axis)
+#Van version for diagonal check
+win_check.sort()
 count = 0
+previous_ls = []
 
-for i in range(len(x_axis)):
-   if i == 0:
-      continue
-   if x_axis[i] == x_axis[i-1] + 1 and x_axis[i-1] == x_axis[0] and y_axis[i] == y_axis[i-1] + 1 and y_axis[i-1] == y_axis[0]:
-      count += 2
-      continue
-   elif x_axis[i] == x_axis[i-1] + 1 and y_axis[i] == y_axis[i-1] + 1: 
+for i in (win_check):
+   if previous_ls == []:
+      previous_ls = i
       count += 1
-      if count == 4:
-         break
-      else:
-         continue
+      print(previous_ls)
    else:
-      count = 0
+      if previous_ls[0] + 1 == i[0] and previous_ls[1] + 1 == i[1]:
+         count += 1
+         previous_ls = i
+
+   
+
+
+# x_axis = []
+# y_axis = []
+# for i in win_check:
+#    x_axis.append(i[0])
+#    y_axis.append(i[1])
+
+# x_axis.sort()
+# print(x_axis)
+# y_axis.sort()
+# print(y_axis)
+# count = 0
+
+# for i in range(len(x_axis)):
+#    if i == 0:
+#       continue
+#    if x_axis[i] == x_axis[i-1] + 1 and x_axis[i-1] == x_axis[0] and y_axis[i] == y_axis[i-1] + 1 and y_axis[i-1] == y_axis[0]:
+#       count += 2
+#       continue
+#    elif x_axis[i] == x_axis[i-1] + 1 and y_axis[i] == y_axis[i-1] + 1: 
+#       count += 1
+#       if count == 4:
+#          break
+#       else:
+#          continue
+#    else:
+#       count = 0
    
       
 
