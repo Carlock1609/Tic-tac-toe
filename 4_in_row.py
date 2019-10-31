@@ -79,17 +79,63 @@ class Game:
             c = coor_list[i]
             horizonal_ls.append(c[0])
             count = horizonal_ls.count(c[0])
-            # print(count)
             if count == 4:
                 print("you win horizontally")
                 exit()
-        
-        
-        
+
+        #vertical check
+        vertical_ls = []
+        for i in range(len(coor_list)):
+            c = coor_list[i]
+            vertical_ls.append(c[1])
+            count = vertical_ls.count(c[1])
+            if count == 4:
+                print("you win vertically")
+                exit()
+
+        #diagonal check from lower-left o upper-right
+        diag_ls = []
+        count_ll_ur = 0
+
+        for i in Game.number_dict.keys():
+            for n in coor_list:
+                if Game.number_dict[i] == n:
+                    n = int(i)
+                    diag_ls.append(n)
 
 
+        for i in diag_ls:
+            if diag_ls.__contains__(i+9):
+                if diag_ls.__contains__(i+18):
+                    if diag_ls.__contains__(i+27):
+                        print("you're win diagonal from lower-left to upper-right.")
+                        exit()
+            if diag_ls.__contains__(i+11):
+                if diag_ls.__contains__(i+22):
+                    if diag_ls.__contains__(i+33):
+                        print("you're win diagonal from upper-left to lower-right.")
+                        exit()
+            
+
         
 
+        #         previous_ls = i
+        #         count_ll_ur += 1
+        #     else:
+        #         if previous_ls[0] + 1 == i[0] and previous_ls[1] + 1 == i[1]:
+        #             count_ll_ur += 1
+        #             previous_ls = i
+        #             # print(count)
+        #             if count_ll_ur == 4:
+        #                 print("you win diagonal! ll - ur")
+        #                 exit()
+
+
+        # #diagonal check from upper-left to lower-right
+        #         previous_ls = []
+        #         count_ul_lr = 0
+                
+                
 
 def game_begin(board, p1, p2):
     winning_undetermined = True
@@ -108,6 +154,8 @@ def game_begin(board, p1, p2):
         board.__repr__()
 
         #play 2 move
+
+
         coor = board.move(p2)
         player2_numb_ls.append(coor)
         board.calc_winner(p2, player2_numb_ls)        
@@ -122,8 +170,8 @@ def main():
    player1_name = input("Player 1, type in your name: ")
    player2_name = input("Player 2, type in your name: ")
    print(f"{player1_name}, you are 'X'. {player2_name}, you are 'O'.")
-   p1= Player(player1_name, 'X') # instantiate player 1
-   p2 = Player(player2_name, 'O') # instantiate player 2
+   p1= Player(player1_name, ' X') # instantiate player 1
+   p2 = Player(player2_name, ' O') # instantiate player 2
    board = Game()
    game_begin(board, p1, p2)
 
